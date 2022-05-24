@@ -3,7 +3,7 @@ import { apiProvider, configureChains, getDefaultWallets, RainbowKitProvider } f
 import '@rainbow-me/rainbowkit/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { chain, createClient, WagmiProvider } from 'wagmi';
+import { chain, createClient, WagmiConfig } from 'wagmi';
 
 import App from './App';
 import './index.css';
@@ -35,12 +35,12 @@ ReactDOM.createRoot(document.querySelector('#root')!).render(
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <React.StrictMode>
       <ChakraProvider theme={theme}>
-        <WagmiProvider client={wagmiClient}>
+        <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <GlobalStyle />
             <App />
           </RainbowKitProvider>
-        </WagmiProvider>
+        </WagmiConfig>
       </ChakraProvider>
     </React.StrictMode>
   </>
