@@ -1,22 +1,12 @@
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { ChakraProvider, extendTheme, withDefaultColorScheme, ColorModeScript, GlobalStyle } from '@chakra-ui/react';
-import { EnyoSupergraph } from '@enyo-web3/core';
-import { EthersProvider, WalletSubgraph } from '@enyo-web3/ethers';
+import { apiProvider, configureChains, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import '@rainbow-me/rainbowkit/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { chain, createClient, WagmiProvider } from 'wagmi';
 
 import App from './App';
 import './index.css';
-
-const cache = new InMemoryCache();
-const supergraph = new EnyoSupergraph({
-  subgraphs: [new WalletSubgraph()],
-  providers: {
-    ethers: new EthersProvider(),
-  },
-  cache,
-});
-const client = new ApolloClient({ cache, link: supergraph.link(), typeDefs: supergraph.typeDefs() });
 
 const theme = extendTheme(
   {
@@ -27,15 +17,30 @@ const theme = extendTheme(
   withDefaultColorScheme({ colorScheme: 'blue' })
 );
 
+const { chains, provider } = configureChains([chain.mainnet], [apiProvider.fallback()]);
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
+
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <React.StrictMode>
       <ChakraProvider theme={theme}>
-        <ApolloProvider client={client}>
-          <GlobalStyle />
-          <App />
-        </ApolloProvider>
+        <WagmiProvider client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <GlobalStyle />
+            <App />
+          </RainbowKitProvider>
+        </WagmiProvider>
       </ChakraProvider>
     </React.StrictMode>
   </>
