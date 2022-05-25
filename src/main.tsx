@@ -1,34 +1,24 @@
-import { ChakraProvider, extendTheme, withDefaultColorScheme, ColorModeScript, GlobalStyle } from '@chakra-ui/react';
-import { apiProvider, configureChains, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { ChakraProvider, ColorModeScript, GlobalStyle, useColorMode } from '@chakra-ui/react';
+import { lightTheme, midnightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { chain, createClient, WagmiConfig } from 'wagmi';
+import { WagmiConfig } from 'wagmi';
 
 import App from './App';
 import './index.css';
+import { theme } from './theme';
+import { chains, wagmiClient } from './walletConfig';
 
-const theme = extendTheme(
-  {
-    config: {
-      initialColorMode: 'system',
-    },
-  },
-  withDefaultColorScheme({ colorScheme: 'blue' })
-);
+const ColoredRainbowKitProvider = ({ children }: React.PropsWithChildren<unknown>) => {
+  const { colorMode } = useColorMode();
 
-const { chains, provider } = configureChains([chain.mainnet], [apiProvider.fallback()]);
-
-const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  chains,
-});
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-});
+  return (
+    <RainbowKitProvider chains={chains} theme={colorMode === 'light' ? lightTheme() : midnightTheme()}>
+      {children}
+    </RainbowKitProvider>
+  );
+};
 
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <>
@@ -36,10 +26,10 @@ ReactDOM.createRoot(document.querySelector('#root')!).render(
     <React.StrictMode>
       <ChakraProvider theme={theme}>
         <WagmiConfig client={wagmiClient}>
-          <RainbowKitProvider chains={chains}>
+          <ColoredRainbowKitProvider>
             <GlobalStyle />
             <App />
-          </RainbowKitProvider>
+          </ColoredRainbowKitProvider>
         </WagmiConfig>
       </ChakraProvider>
     </React.StrictMode>
