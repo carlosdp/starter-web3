@@ -18,4 +18,4 @@ jobs:
       - name: Yarn Install
         run: yarn install --immutable
       - name: Check Typescript
-        run: cd app && yarn run check
+        run: yarn tsc --noEmit
