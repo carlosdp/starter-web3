@@ -1,0 +1,21 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - name: Yarn Install
+        run: yarn install --immutable
+      - name: Check Typescript
+        run: cd app && yarn run check
