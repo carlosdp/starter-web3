@@ -3,6 +3,7 @@ import { lightTheme, midnightTheme, RainbowKitProvider } from '@rainbow-me/rainb
 import '@rainbow-me/rainbowkit/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { WagmiConfig } from 'wagmi';
 
 import App from './App';
@@ -28,7 +29,9 @@ ReactDOM.createRoot(document.querySelector('#root')!).render(
         <WagmiConfig client={wagmiClient}>
           <ColoredRainbowKitProvider>
             <GlobalStyle />
-            <App />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
           </ColoredRainbowKitProvider>
         </WagmiConfig>
       </ChakraProvider>

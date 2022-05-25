@@ -1,5 +1,14 @@
 import { Box, Text } from '@chakra-ui/react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { Routes, Route } from 'react-router-dom';
+
+function Home() {
+  return (
+    <Box width="100%" maxWidth="936px">
+      <Text>Content Here</Text>
+    </Box>
+  );
+}
 
 function App() {
   return (
@@ -12,7 +21,9 @@ function App() {
           </Box>
         </Box>
       </Box>
-      <Box width="100%" maxWidth="936px"></Box>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </Box>
   );
 }
