@@ -2,6 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { cleanup, render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { afterEach } from 'vitest';
 import { WagmiConfig } from 'wagmi';
 
@@ -19,7 +20,9 @@ const customRender = (ui: React.ReactElement, options = {}) =>
       return (
         <ChakraProvider theme={theme}>
           <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+            <RainbowKitProvider chains={chains}>
+              <MemoryRouter>{children}</MemoryRouter>
+            </RainbowKitProvider>
           </WagmiConfig>
         </ChakraProvider>
       );

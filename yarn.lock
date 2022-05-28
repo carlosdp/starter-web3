@@ -3314,9 +3314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rainbow-me/rainbowkit@npm:^0.1":
-  version: 0.1.2
-  resolution: "@rainbow-me/rainbowkit@npm:0.1.2"
+"@rainbow-me/rainbowkit@npm:^0.2":
+  version: 0.2.1
+  resolution: "@rainbow-me/rainbowkit@npm:0.2.1"
   dependencies:
     "@vanilla-extract/css": 1.7.0
     "@vanilla-extract/dynamic": 2.0.2
@@ -3328,8 +3328,8 @@ __metadata:
     ethers: ">=5.5.1"
     react: ">=17"
     react-dom: ">=17"
-    wagmi: ^0.3.2
-  checksum: 59124400f738268f9f87cc6e2159ee9c3e473bb5557b5b80ae90d672bc5f5f755a409e1e21ae483ba9863cac700210818e4cf183bfd10826bcfbbef1d427895a
+    wagmi: ^0.4.2
+  checksum: ea611caafda97688d7d864e3a7ec95a9a83be5d5ed1ba326a2117f61b1ed0c3cf4ef75f43661c34859f2dc084388d1d66136730e86f205f3359a09f1d1cfb8cc
   languageName: node
   linkType: hard
 
@@ -9494,7 +9494,7 @@ __metadata:
     "@emotion/eslint-plugin": ^11.7.0
     "@emotion/react": ^11
     "@emotion/styled": ^11
-    "@rainbow-me/rainbowkit": ^0.1
+    "@rainbow-me/rainbowkit": ^0.2
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.2.0
     "@testing-library/react-hooks": ^8.0.0

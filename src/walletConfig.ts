@@ -1,7 +1,8 @@
-import { apiProvider, configureChains, getDefaultWallets } from '@rainbow-me/rainbowkit';
-import { chain, createClient } from 'wagmi';
+import { getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { chain, createClient, configureChains } from 'wagmi';
+import { publicProvider } from 'wagmi/providers/public';
 
-export const { chains, provider } = configureChains([chain.mainnet], [apiProvider.fallback()]);
+export const { chains, provider } = configureChains([chain.mainnet], [publicProvider()]);
 
 export const { connectors } = getDefaultWallets({
   appName: 'My RainbowKit App',
