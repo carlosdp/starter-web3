@@ -4,3 +4,4 @@ contracts
 generated
 data
 !.storybook
+!.lint-staged.config.js
